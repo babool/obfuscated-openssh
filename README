@@ -1,3 +1,14 @@
+Password Option
+----------------
+
+Provide password directly in command line with -W option.
+
+Yes, it is not safe, but I need this fucntion for use auto ssh port forwarding
+but we cann't upload pub key to server.
+
+usage:
+ssh [some options] -W password
+
 Handshake Obfuscation
 ---------------------
 
