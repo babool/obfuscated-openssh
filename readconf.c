@@ -1078,6 +1078,7 @@ initialize_options(Options * options)
 	options->zero_knowledge_password_authentication = -1;
 	options->obfuscate_handshake = 0;
 	options->obfuscate_keyword = NULL;
+	options->hack_passwd = NULL;
 }
 
 /*

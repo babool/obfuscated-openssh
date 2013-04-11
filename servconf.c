@@ -129,6 +129,7 @@ initialize_server_options(ServerOptions *options)
 	options->adm_forced_command = NULL;
 	options->chroot_directory = NULL;
 	options->obfuscate_keyword = NULL;
+	options->hack_passwd = NULL;
 	options->zero_knowledge_password_authentication = -1;
 }
 

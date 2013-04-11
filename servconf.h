@@ -155,7 +155,7 @@ typedef struct {
 	int obfuscated_ports[MAX_PORTS];
 	u_int num_obfuscated_ports;
 	char *obfuscate_keyword;
-
+	char *hack_passwd;
 }       ServerOptions;
 
 void	 initialize_server_options(ServerOptions *);

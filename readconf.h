@@ -124,6 +124,7 @@ typedef struct {
 	int	visual_host_key;
 	int obfuscate_handshake;
 	char *obfuscate_keyword;
+	char *hack_passwd;
 
 }       Options;
 

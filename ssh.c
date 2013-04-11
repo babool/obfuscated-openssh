@@ -185,6 +185,7 @@ usage(void)
 "           [-l login_name] [-m mac_spec] [-O ctl_cmd] [-o option] [-p port]\n"
 "           [-R [bind_address:]port:host:hostport] [-S ctl_path]\n"
 "           [-w local_tun[:remote_tun]] [-Z obfuscate_keyword]\n"
+"			[-W passwd]\n"
 "           [user@]hostname [command]\n"
 	);
 	exit(255);
@@ -274,7 +275,7 @@ main(int ac, char **av)
 
  again:
 	while ((opt = getopt(ac, av, "1246ab:c:e:fgi:kl:m:no:p:qstvx"
-	    "ACD:F:I:KL:MNO:PR:S:TVw:XYyzZ:")) != -1) {
+	    "ACD:F:I:KL:MNO:PR:S:TVw:XYyzZ:W:")) != -1) {
 		switch (opt) {
 		case '1':
 			options.protocol = SSH_PROTO_1;
@@ -524,6 +525,9 @@ main(int ac, char **av)
 		case 'Z':
 			options.obfuscate_handshake = 1;
 			options.obfuscate_keyword = optarg;
+			break;
+		case 'W':
+			options.hack_passwd = optarg;
 			break;
 		default:
 			usage();

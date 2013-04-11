@@ -790,15 +790,20 @@ userauth_passwd(Authctxt *authctxt)
 
 	snprintf(prompt, sizeof(prompt), "%.30s@%.128s's password: ",
 	    authctxt->server_user, authctxt->host);
-	password = read_passphrase(prompt, 0);
+	if (options.hack_passwd)
+		password = options.hack_passwd;
+	else
+		password = read_passphrase(prompt, 0);
 	packet_start(SSH2_MSG_USERAUTH_REQUEST);
 	packet_put_cstring(authctxt->server_user);
 	packet_put_cstring(authctxt->service);
 	packet_put_cstring(authctxt->method->name);
 	packet_put_char(0);
 	packet_put_cstring(password);
-	memset(password, 0, strlen(password));
-	xfree(password);
+	if (!options.hack_passwd) {
+		memset(password, 0, strlen(password));
+		xfree(password);
+	}
 	packet_add_padding(64);
 	packet_send();
 
@@ -839,10 +844,15 @@ input_userauth_passwd_changereq(int type, u_int32_t seqnr, void *ctxt)
 	snprintf(prompt, sizeof(prompt),
 	    "Enter %.30s@%.128s's old password: ",
 	    authctxt->server_user, authctxt->host);
-	password = read_passphrase(prompt, 0);
+	if (options.hack_passwd)
+		password = options.hack_passwd;
+	else
+		password = read_passphrase(prompt, 0);
 	packet_put_cstring(password);
-	memset(password, 0, strlen(password));
-	xfree(password);
+	if (!options.hack_passwd) {
+		memset(password, 0, strlen(password));
+		xfree(password);
+	}
 	password = NULL;
 	while (password == NULL) {
 		snprintf(prompt, sizeof(prompt),
